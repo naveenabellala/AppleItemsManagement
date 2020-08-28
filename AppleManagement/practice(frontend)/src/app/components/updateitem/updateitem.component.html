@@ -1,0 +1,173 @@
+
+<div class="container">
+    <div class="card">
+        <div class='card-header' *ngIf="item">
+            <h4>{{pageTitle + ': ' + item.name}}</h4>
+        </div>
+        <div class="card-body">
+            <form  novalidate [formGroup]="myForm">
+                
+                <div class="form-group row mb-2">                
+                    <label class='col-md-2'> Name</label>                
+                    <div class='col-md-6'>
+                        <input type="text" class="form-control" formControlName="name" #name [(ngModel)] = "item.name" />
+                    </div>
+                    <div>          
+                        <div *ngIf="myForm.controls['name'].invalid && 
+                            (myForm.controls['name'].dirty || 
+                            myForm.controls['name'].touched)" class="alert alert-danger">
+                            <span *ngIf="myForm.controls['name'].errors.required">
+                                 Name is required.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+    
+                <div class="form-group row mb-2">
+                    <div class='col-md-2'><label> Code</label></div>
+                    <div class='col-md-6'>                    
+                        <input type="text" class="form-control" formControlName="code" #code [(ngModel)] = "item.code"/>
+                    </div>
+                    <div>
+                        <div *ngIf="myForm.controls['code'].invalid && 
+                            (myForm.controls['code'].dirty || 
+                            myForm.controls['code'].touched)" class="alert alert-danger">
+                        <span *ngIf="myForm.controls['code'].errors.required">
+                        Code is required.
+                        </span>
+                    </div>
+                    </div>
+                </div>
+                
+               
+    
+                <div class="form-group row mb-2">
+                    <div class='col-md-2'><label > Owner</label></div>
+                    <div class='col-md-6'>
+                        <input type="text" class="form-control" formControlName="owner" #owner [(ngModel)] = "item.owner"/>
+                    </div>
+                    <div>
+                         <div *ngIf="myForm.controls['owner'].invalid && 
+                            (myForm.controls['owner'].dirty || 
+                            myForm.controls['owner'].touched)" class="alert alert-danger">
+                            <span *ngIf="myForm.controls['owner'].errors.required">
+                                Owner is required.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group row mb-2">
+                    <div class='col-md-2'><label > Price</label></div>
+                    <div class='col-md-6'>
+                        <input type="number" class="form-control" formControlName="price" #price [(ngModel)] = "item.price"/>
+                    </div>
+                    <div>
+                        <div *ngIf="myForm.controls['price'].invalid && 
+                                (myForm.controls['price'].dirty || 
+                                myForm.controls['price'].touched)" class="alert alert-danger">
+                                <span *ngIf="myForm.controls['price'].errors.required">
+                                    Price is required.
+                                </span>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group row mb-2">
+                    <div class='col-md-2'><label> Image</label></div>
+                    <div class='col-md-6'>
+                        <input type="text" class="form-control" formControlName="imageUrl" #imageUrl [(ngModel)] = "item.imageUrl"/>
+                    </div>
+                    <div>
+                        <div *ngIf="myForm.controls['imageUrl'].invalid && 
+                                (myForm.controls['imageUrl'].dirty || 
+                                myForm.controls['imageUrl'].touched)" class="alert alert-danger">
+                            <span *ngIf="myForm.controls['imageUrl'].errors.required">
+                                    Image url is required.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group row mb-2">
+                    <div class='col-md-2'><label> Rating</label></div>
+                    <div class='col-md-6'>
+                        <input type="number" class="form-control" formControlName="rating" #rating [(ngModel)] = "item.rating"/>
+                    </div>
+                    <div> 
+                        <div *ngIf="myForm.controls['rating'].invalid && 
+                            (myForm.controls['rating'].dirty || 
+                            myForm.controls['rating'].touched)" class="alert alert-danger">
+                                <span *ngIf="myForm.controls['rating'].errors.required">
+                                    Rating is required.
+                                </span>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group row mb-2">
+                    <div class='col-md-2'><label> Availability</label></div>
+                    <div class='col-md-6'>
+                        <input type="date" class="form-control" formControlName="availability" #availability [(ngModel)] = "item.availability"/>
+                    </div>
+                    <div>
+                        <div *ngIf="myForm.controls['availability'].invalid && 
+                                    (myForm.controls['availability'].dirty || 
+                                     myForm.controls['availability'].touched)" class="alert alert-danger">
+                                <span *ngIf="myForm.controls['availability'].errors.required">
+                                    Availability is required.
+                                </span>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group row mb-2">
+                    <div class='col-md-2'><label> Feedback</label></div>
+                    <div class='col-md-6'>
+                        <input type="text" class="form-control" formControlName="feedback" #feedback [(ngModel)] = "item.feedback"/>
+                    </div>
+                <div>
+                        <div *ngIf="myForm.controls['feedback'].invalid && 
+                            (myForm.controls['feedback'].dirty || 
+                            myForm.controls['feedback'].touched)" class="alert alert-danger">
+                                <span *ngIf="myForm.controls['feedback'].errors.required" class='col-md-9'>
+                                    Feedback is required.
+                                </span>
+                        </div>
+                </div>
+                </div>
+    
+                <div class="form-group row mb-2">
+                    
+                    <div class='col-md-2'>
+                    <button (click)="saveEditedItem(name.value,code.value,owner.value,price.value,imageUrl.value,rating.value,availability.value,feedback.value)"
+                    [disabled]="myForm.pristine || myForm.invalid" 
+                    class="btn btn-primary" >Save
+                    </button>
+                    </div>
+                   
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class='card-footer' style="text-align:right">
+        <div class="form-group row mb-2">
+            <div class='col-md-1'>
+                <button class='btn btn-outline-secondary'
+                    [routerLink] = "['/items']"
+                    style='width:80px'>
+                    <i class='fa fa-chevron-left'></i> Back
+                </button>
+            </div>
+            <div class='col-md-11'>
+                <a [routerLink] = "['/welcome']" ><i class='fa fa-chevron-left'></i> Go To Home</a>
+            </div>
+            
+        </div>       
+    </div>
+    </div>
+    

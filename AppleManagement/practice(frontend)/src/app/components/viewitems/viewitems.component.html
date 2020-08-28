@@ -1,0 +1,74 @@
+<div class='container'>
+    <div class='card'>
+        <div class='card-header'>
+            <h2>{{pageTitle}}</h2>
+        </div>
+        <br>
+        <div class='card-body'>
+            <div class='row'>
+                <div class='col-md-2'>
+                    <h4>Filter by Owner:</h4>
+                </div>
+                <div class='col-md-4'>
+                    <input type='text' [(ngModel)]='listFilter' />
+                </div>
+            </div>
+            <div class='row' *ngIf='listFilter'>
+                <div class='col-md-6'>
+                    <h4>Filtered by Owner: {{listFilter}}</h4>
+                </div>
+            </div>
+
+
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <button class='btn btn-primary' (click)='imageToggle()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                            <th>Item Name</th>
+                            <th>Item Code</th>
+                            <th>Item Owner</th>
+                            <th>Price</th>
+                            <th>Rating</th>
+                            <th colspan="2">Actions</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let item of filteredItems'>
+                            <td>
+                                <img *ngIf='showImage' [src]='item.imageUrl' [title]='item.name | uppercase'
+                                    [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
+                            </td>
+                            <td><a [routerLink]="['/itemdetails', item.id]">
+                                    {{ item.name }}
+                                </a></td>
+                            <td>{{item.code | convertToSpaces : '-'}}</td>
+                            <td>{{item.owner | uppercase}}</td>
+                            <td>{{item.price | currency : 'INR'}}</td>
+                            <td>
+                                <app-star [rating]='item.rating' (ratingClicked)='onRatingClicked($event)'>
+
+                                </app-star>
+                            </td>
+                            <td><button class='btn btn-danger' (click)="deleteItem(item.id)">Delete</button></td>
+                            <td><button class='btn btn-primary' [routerLink]="['/updateitem',item.id]">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class='card-footer' style="text-align:right">
+            <a [routerLink]="['/welcome']">Go To Home</a>
+        </div>
+    </div>
+    <div *ngIf='errorMessage' class='alert alert-danger'>
+        Error: {{ errorMessage }}
+    </div>
+</div>
